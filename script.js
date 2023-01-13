@@ -6,35 +6,40 @@ const player2 = player("Player 2", "O");
 
 // Modules
 const gameBoard = (() => {
-  const boardArray = [
-    player1.marker,
-    player2.marker,
-    player1.marker,
-    player2.marker,
-    player1.marker,
-    player2.marker,
-    player1.marker,
-    player2.marker,
-    player1.marker,
-  ];
-
+  const boardArray = new Array(9);
   const gameBoardDiv = document.querySelector(".gameBoard");
 
-  const displayBoard = () => {
-    for (let i = 0; i < gameBoard.boardArray.length; i++) {
+  const displayBoard = (() => {
+    for (let i = 0; i < 9; i++) {
       const tile = document.createElement("div");
-      tile.textContent = `${gameBoard.boardArray[i]}`;
+      tile.textContent = "";
       tile.dataset.index = i;
       gameBoardDiv.appendChild(tile);
     }
+  })();
+
+  return { boardArray };
+})();
+
+const playGame = (() => {
+  let currentPlayer = player1;
+
+  const swapPlayerTurn = () => {
+    if (currentPlayer === player1) {
+      currentPlayer = player2;
+    } else {
+      currentPlayer = player1;
+    }
   };
 
-  return { boardArray, displayBoard };
-})();
+  const placeMarker = (e) => {
+    const i = e.target.dataset.index;
+    if (gameBoard.boardArray[i]) return;
+    gameBoard.boardArray[i] = currentPlayer.marker;
+    e.target.textContent = currentPlayer.marker;
+    swapPlayerTurn();
+  };
 
-const displayController = (() => {
-  const nextTurn = () => console.log("Next player move");
-  return { nextTurn };
+  const tiles = document.querySelectorAll(".gameBoard div");
+  tiles.forEach((tile) => tile.addEventListener("click", placeMarker));
 })();
-
-gameBoard.displayBoard();
