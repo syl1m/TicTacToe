@@ -57,6 +57,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition-duration: 0.2s;
+}
+
+.gameBoard div:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 0.3rem var(--purple));
+  background-color: var(--purple);
 }
 
 /* Restart button */
@@ -70,6 +77,12 @@ body {
   background-color: var(--dark-grey);
   padding: 10px 30px;
   font-size: 1.3rem;
+  transition-duration: 0.2s;
+}
+
+.restartBtn button:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 0.3rem var(--purple));
 }
 
 /* Footer */
