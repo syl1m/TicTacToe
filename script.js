@@ -3,6 +3,8 @@ const player = (name, marker) => ({ name, marker });
 
 const player1 = player("Player 1", "X");
 const player2 = player("Player 2", "O");
+let currentPlayer = player1;
+let gameState = "unresolved";
 
 // Modules
 const gameBoard = (() => {
@@ -22,7 +24,6 @@ const gameBoard = (() => {
 })();
 
 const playGame = (() => {
-  let gameState = "unresolved";
   const checkWinState = () => {
     if (
       gameBoard.boardArray[0] === gameBoard.boardArray[1] &&
@@ -79,7 +80,6 @@ const playGame = (() => {
     return gameState;
   };
 
-  let currentPlayer = player1;
   const swapPlayerTurn = () => {
     if (currentPlayer === player1) {
       currentPlayer = player2;
@@ -114,4 +114,17 @@ const playGame = (() => {
   tiles.forEach((tile) => tile.addEventListener("click", placeMarker));
 
   return {};
+})();
+
+const displayController = (() => {
+  const restartGame = () => {
+    currentPlayer = player1;
+    gameState = "unresolved";
+    gameBoard.boardArray = new Array(9);
+    const gameBoardDivs = document.querySelectorAll(".gameBoard div");
+    gameBoardDivs.forEach((div) => (div.textContent = ""));
+  };
+
+  const restartBtn = document.querySelector(".restartBtn button");
+  restartBtn.addEventListener("click", restartGame);
 })();
