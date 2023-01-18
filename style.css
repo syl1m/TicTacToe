@@ -18,6 +18,32 @@
   color: var(--white);
 }
 
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--black);
+  opacity: 0.8;
+  z-index: 2;
+  display: none;
+}
+
+.gameOver {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  background-color: var(--black);
+  border-radius: 30px;
+  padding: 20px;
+  display: none;
+  text-align: center;
+  font-size: 2rem;
+}
+
 header {
   display: flex;
   padding: 20px;
@@ -40,6 +66,23 @@ body {
   flex: 1;
   justify-content: center;
   align-items: center;
+}
+
+/* Players */
+.playerNames {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.player {
+  border-radius: 30px;
+  padding: 5px 30px;
+  font-size: 1.5rem;
+}
+
+.current-player {
+  background-color: var(--purple);
 }
 
 /* Gameboard */
@@ -69,6 +112,7 @@ body {
 /* Restart button */
 .restartBtn {
   padding: 20px;
+  z-index: 3;
 }
 
 .restartBtn button {
